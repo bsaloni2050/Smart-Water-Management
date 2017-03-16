@@ -6,7 +6,7 @@ import matplotlib.axes as ax
 import matplotlib.patches as patches
 from time import sleep
 import math
-
+import matplotlib.image as mpimg
 
 x = []
 original_value = []
@@ -117,6 +117,17 @@ slope[len(combine)-1] = 0
 
 class Index(object):
     ind = 0
+
+    def stie_map(self, events):
+        self.ind += 1
+
+        plt.clf()
+        plt.subplot(223)
+        img = mpimg.imread('sitemap.png')
+        #plt.axes('off')
+        plt.imshow(img)
+        plt.show()
+
 
     def rawData(self, event):
         self.ind += 1
@@ -594,13 +605,25 @@ class Index(object):
         plt.show()
 
     def show_buttons(self, event):
+
+        plt.axes('off')
+        plt.clf()
         ax = plt.gca()
         ax.figure.canvas.draw()
-        analysisax = plt.axes([0.5, 0.5, 0.5, 0.075])
+        analysisax = plt.axes([0.05, 0.015, 0.25, 0.075])
+        analysisb = Button(analysisax, 'Likelihood Indicator')
+        analysisb.on_clicked(self.likelihood_call)
+        ax.figure.canvas.draw()
+
+        analysisax = plt.axes([0.35, 0.015, 0.25, 0.075])
+        analysisb = Button(analysisax, 'Severity Indicator')
+        analysisb.on_clicked(self.severity_call)
+        ax.figure.canvas.draw()
+
+        analysisax = plt.axes([0.65, 0.015, 0.25, 0.075])
         analysisb = Button(analysisax, 'Risk Indicator')
         ax.figure.canvas.draw()
         analysisb.on_clicked(self.risk_call)
-        plt.show()
 
 
 callback = Index()
@@ -612,9 +635,9 @@ biocon = Button(bioconAx, 'BioCon')
 biocon.on_clicked(callback.rawData)
 
 netleak = Button(netLeakAx, 'NetLeak')
-#netleak.on_clicked(callback.analysis)
+netleak.on_clicked(callback.stie_map)
 
 energycon = Button(energyconAx, 'EnOpt')
-#energycon.on_clicked(callback.likly)
+energycon.on_clicked(callback.show_buttons)
 
 plt.show()
