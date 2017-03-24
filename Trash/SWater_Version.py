@@ -49,6 +49,7 @@ for data in non_anomaly:
         count += 1
 
 mu = sum1 / count
+print (mu)
 
 # Normalizing the Data:
 for data in non_anomaly:
@@ -64,10 +65,10 @@ for data in anomaly:
         N_anomaly.append(np.nan)
 
 # Re-checking Data
-print (N_non_anomaly[:])
+#print (N_non_anomaly[:])
 
 sta = np.nanstd(N_non_anomaly);
-print (sta)
+#print (sta)
 
 #Combining the data
 for i in N_anomaly:
@@ -75,6 +76,11 @@ for i in N_anomaly:
         combine.append(N_non_anomaly)
     else:
         combine.append(N_anomaly)
+
+sta = np.nanstd(combine);
+print (sta)
+print (combine)
+
 
 # plotting the Normalized Data
 

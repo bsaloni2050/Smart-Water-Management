@@ -68,11 +68,10 @@ for data in anomaly:
     else:
         N_anomaly.append(np.nan)
 
-# Re-checking Data
-print (N_non_anomaly[:])
-
-sta = np.nanstd(N_non_anomaly);
-print (sta)
+# # Re-checking Data
+# print (N_non_anomaly[:])
+# sta = np.nanstd(N_non_anomaly);
+# print (sta)
 
 # Combining the data
 for i in range(len(N_non_anomaly)):
@@ -80,6 +79,13 @@ for i in range(len(N_non_anomaly)):
         combine.append(N_non_anomaly[i])
     else:
         combine.append(N_anomaly[i])
+
+#sta = np.nanstd(combine, 2)
+#sta2 = np.nanstd(sta)
+
+#print (sta)
+print (combine)
+#print (sta2)
 
 
 # define likelihood, Severity ,Risk matrix
@@ -122,12 +128,18 @@ class Index(object):
         self.ind += 1
 
         plt.clf()
-        plt.subplot(223)
-        img = mpimg.imread('sitemap.png')
-        #plt.axes('off')
-        plt.imshow(img)
-        plt.show()
+        ax = plt.gca()
+        plt.subplot(211)
 
+        img = mpimg.imread('sitemap.png')
+        plt.imshow(img)
+
+        analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
+        analysisb = Button(analysisax, 'Launch EPANET')
+        ax.figure.canvas.draw()
+        analysisb.on_clicked(self.analysis)
+        self.show_buttons(event)
+        plt.show()
 
     def rawData(self, event):
         self.ind += 1
