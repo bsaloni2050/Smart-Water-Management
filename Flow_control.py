@@ -8,9 +8,14 @@ from time import sleep
 import math
 import matplotlib.image as mpimg
 import os
+from matplotlib import gridspec
+from matplotlib.offsetbox import AnchoredText
+
+
 
 x = []
 original_value = []
+Normalized = []
 anomaly = []
 non_anomaly = []
 N_anomaly = []
@@ -23,17 +28,10 @@ workbook = xlrd.open_workbook('/Users/salonibindra/Desktop/BioCon.xlsx')
 sheet_names = workbook.sheet_names()
 sheet = workbook.sheet_by_name('Sheet1')
 
-# print(sheet.col_values(0))
-
 for cell in sheet.col(1):
     x.append(cell.value)
 for cell in sheet.col(2):
     original_value.append(cell.value)
-
-# print (original_value)
-# plt.figure(1)
-# plt.subplot(211)
-# plt.plot(x, original_value)
 
 threshold = 145
 
@@ -46,7 +44,7 @@ for data in original_value:
         non_anomaly.append(data)
         anomaly.append(0)
 
-# Calculating MU from the Non-Anomaly Data
+# Calculating average from the Non-Anomaly Data
 sum1 = 0
 count = 0
 for data in non_anomaly:
@@ -56,7 +54,13 @@ for data in non_anomaly:
 
 mu = sum1 / count
 
-# Normalizing the Data:
+# Normalizing the Data (combined):
+for data in original_value:
+    Normalized.append(data / mu)
+
+# print (Normalized)
+
+# Normalizing the Data (separately):
 for data in non_anomaly:
     if data != 0:
         N_non_anomaly.append(data / mu)
@@ -69,10 +73,40 @@ for data in anomaly:
     else:
         N_anomaly.append(np.nan)
 
-# # Re-checking Data
-# print (N_non_anomaly[:])
-# sta = np.nanstd(N_non_anomaly);
-# print (sta)
+# calculate the first STD : round 1
+upper_bound = 1 + np.nanstd(N_non_anomaly)
+print (upper_bound)
+# print (Normalized[1])
+
+# Filter for non-anomaly Round :1
+
+for i in range(len(Normalized)):
+    if N_non_anomaly[i] < upper_bound:
+        N_anomaly[i] = N_non_anomaly[i]
+        N_non_anomaly[i] = np.nan
+    elif N_anomaly[i] > upper_bound:
+        N_anomaly[i] = np.nan
+        N_non_anomaly[i] = N_anomaly[i]
+
+# calculate the first STD : round 2
+upper_bound2 = 1 + np.nanstd(N_non_anomaly)
+print (upper_bound2)
+
+# Filter for non-anomaly Round :2
+
+for i in range(len(Normalized)):
+    if N_non_anomaly[i] < upper_bound:
+        N_anomaly[i] = N_non_anomaly[i]
+        N_non_anomaly[i] = np.nan
+    elif N_anomaly[i] > upper_bound:
+        N_anomaly[i] = np.nan
+        N_non_anomaly[i] = N_anomaly[i]
+
+# print (N_anomaly)
+# print (N_non_anomaly)
+
+
+
 
 # Combining the data
 for i in range(len(N_non_anomaly)):
@@ -81,12 +115,12 @@ for i in range(len(N_non_anomaly)):
     else:
         combine.append(N_anomaly[i])
 
-#sta = np.nanstd(combine, 2)
-#sta2 = np.nanstd(sta)
+# sta = np.nanstd(combine, 2)
+# sta2 = np.nanstd(sta)
 
-#print (sta)
-print (combine)
-#print (sta2)
+# print (sta)
+#print (combine)
+# print (sta2)
 
 
 # define likelihood, Severity ,Risk matrix
@@ -107,7 +141,7 @@ for i in range(2, len(combine)):
     x1 = combine[i] - combine[i - 1]
     slope[i] = (x1)
 
-slope[len(combine)-1] = 0
+slope[len(combine) - 1] = 0
 
 
 # plotting the Normalized Data
@@ -132,13 +166,28 @@ class Index(object):
         ax = plt.gca()
         plt.subplot(211)
 
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
         img = mpimg.imread('sitemap.png')
+        plt.tick_params(axis='both', which='both', bottom='off', top='off', labelbottom='off')
+        plt.tick_params(axis='y', which='both', bottom='off', top='off', labelbottom='off', labeltop='off')
+        plt.setp(ax.get_yticklabels(), visible=False)
+
         plt.imshow(img)
 
-        analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
-        analysisb = Button(analysisax, 'Launch EPANET')
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
+
+        analysisax1 = plt.axes([0.25, 0.1, 0.5, 0.075])
+        analysisb1 = Button(analysisax1, 'View Data')
+        analysisb1.on_clicked(self.rawData)
+
+        epanetax = plt.axes([0.25, 0.3, 0.5, 0.075])
+        epanetb = Button(epanetax, 'Launch EPANET')
         ax.figure.canvas.draw()
-        analysisb.on_clicked(self.analysis)
+        epanetb.on_clicked(self.launch_Epanet)
         # self.show_buttons(event)
         plt.show()
 
@@ -147,7 +196,6 @@ class Index(object):
         os.system("open /Applications/Safari.app")
         plt.show()
 
-
     def rawData(self, event):
         self.ind += 1
 
@@ -155,19 +203,37 @@ class Index(object):
         plt.clf()
         plt.subplot(211)
         ax = plt.gca()
-        ax.plot(x, original_value)
+        ax.plot(x, original_value, label='Raw-Values')
         plt.xlabel('TIme Series')
         plt.ylabel('Raw BioCon Values')
         plt.title('Raw Data in Time Series')
-        #plt.ion()
+        plt.legend()
+
+        # plt.ion()
         ax.figure.canvas.draw()
 
         analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
-        analysisb = Button(analysisax, 'analysis')
+        analysisb = Button(analysisax, 'Continue with Analysis')
         ax.figure.canvas.draw()
         analysisb.on_clicked(self.analysis)
-        #self.show_buttons(event)
+
+
+        timeseriesax = plt.axes([0.3, 0.2, 0.5, 0.075])
+        time_seriesb = Button(timeseriesax, 'Time Series Range Update')
+        ax.figure.canvas.draw()
+        time_seriesb.on_clicked(self.select_time_series)
+
+        back_ax = plt.axes([0.3, 0.1, 0.5, 0.075])
+        back_but = Button(back_ax, 'Back')
+        ax.figure.canvas.draw()
+        back_but.on_clicked(self.stie_map)
+        # self.show_buttons(event)
         plt.show()
+
+    def select_time_series(self, event):
+        print ('')
+
+
 
     def analysis(self, event):
         self.ind += 1
@@ -176,22 +242,54 @@ class Index(object):
         plt.clf()
         plt.subplot(211)
         ax = plt.gca()
-        ax.plot(N_non_anomaly, 'o', color='g')
-        ax.plot(N_anomaly, 'o', color='r')
-        ax.axhline(y=1, color='k')
-        ax.axhline(y=0.96, color='b')
-        ax.axhline(y=0.9, color='c')
-        ax.axhline(y=0.8, color='y')
-        ax.axhline(y=0.7, color='r')
+        ax.plot(N_non_anomaly, 'o', color='g', label='Nonanomaly')
+        ax.plot(N_anomaly, 'o', color='r',label='Anomaly')
+        ax.axhline(y=1, color='k', label='1%')
+        ax.axhline(y=0.96, color='b', label=' 4%')
+        ax.axhline(y=0.9, color='c', label=' 10%')
+        ax.axhline(y=0.8, color='y', label=' 20%')
+        ax.axhline(y=0.7, color='r', label=' 30%')
+        plt.xlabel('Time Series')
+        plt.ylabel(' Delta F')
+        plt.title('Delta F v/s Time Series')
+        plt.legend(loc =1)
         ax.figure.canvas.draw()
-        analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
-        analysisb = Button(analysisax, 'Likelihood Indicator')
+
+        likx = plt.axes([0.3, 0.4, 0.5, 0.075])
+        likb = Button(likx, 'Likelihood Indicator')
         ax.figure.canvas.draw()
-        analysisb.on_clicked(self.likelihood_call)
+
+        likb.on_clicked(self.likelihood_call)
+
+        sevx = plt.axes([0.3, 0.3, 0.5, 0.075])
+        sevb = Button(sevx, 'Severity Indicator')
+        ax.figure.canvas.draw()
+        sevb.on_clicked(self.severity_call)
+
+        riskx = plt.axes([0.3, 0.2, 0.5, 0.075])
+        riskb = Button(riskx, 'Risk Indicator')
+        ax.figure.canvas.draw()
+        riskb.on_clicked(self.risk_call)
+
+        back_ax = plt.axes([0.3, 0.1, 0.5, 0.075])
+        back_but = Button(back_ax, 'Back')
+        ax.figure.canvas.draw()
+        back_but.on_clicked(self.stie_map)
+
+        ax.figure.canvas.draw()
         plt.show()
 
+
+
     def likelihood_call(self, event):
+
         self.ind += 1
+        plt.clf()
+
+        insignificant = 0.96
+        low = 0.9
+        moderate = 0.8
+        high = 0.7
 
         # Calculate the likelihood Matrix
         for i in range(len(combine)):
@@ -207,114 +305,114 @@ class Index(object):
                 n = 'fifth hour'
 
             if n == 'first hour':
-                if combine[i] > 0.96:
+                if combine[i] > insignificant:
                     likelihood[i] = 0.05
                     likelihoodM[0][0].append(i)  # blue
 
-                elif combine[i] <= 0.96 or combine[i] > 0.9:
+                elif combine[i] <= insignificant or combine[i] > low:
                     likelihood[i] = 0.2
                     likelihoodM[1][0].append(i)  # green
 
-                elif combine[i] <= 0.9 or combine[i] > 0.8:
+                elif combine[i] <= low or combine[i] > moderate:
                     likelihood[i] = 0.2
                     likelihoodM[2][0].append(i)  # green
 
-                elif combine[i] <= 0.8 or combine[i] > 0.7:
+                elif combine[i] <= moderate or combine[i] > high:
                     likelihood[i] = 0.45
                     likelihoodM[3][0].append(i)  # yellow
 
-                elif combine[i] <= 0.7:
+                elif combine[i] <= high:
                     likelihood[i] = 0.45
                     likelihoodM[4][0].append(i)  # yellow
 
             elif n == 'second hour':
-                if combine[i] > 0.96:
+                if combine[i] > insignificant:
                     likelihood[i] = 0.05
                     likelihoodM[0][1].append(i)  # blue
 
-                elif combine[i] <= 0.96 or combine[i] > 0.9:
+                elif combine[i] <= insignificant or combine[i] > low:
                     likelihood[i] = 0.2
                     likelihoodM[1][1].append(i)  # green
 
-                elif combine[i] <= 0.9 or combine[i] > 0.8:
+                elif combine[i] <= low or combine[i] > moderate:
                     likelihood[i] = 0.45
                     likelihoodM[2][1].append(i)  # yellow
 
-                elif combine[i] <= 0.8 or combine[i] > 0.7:
+                elif combine[i] <= moderate or combine[i] > high:
                     likelihood[i] = 0.45
                     likelihoodM[3][1].append(i)  # yellow
 
-                elif combine[i] <= 0.7:
+                elif combine[i] <= high:
                     likelihood[i] = 0.75
                     likelihoodM[4][1].append(i)  # orange
 
             elif n == 'third hour':
-                if combine[i] > 0.96:
+                if combine[i] > insignificant:
                     likelihood[i] = 0.05
                     likelihoodM[0][2].append(i)  # blue
 
-                elif combine[i] <= 0.96 or combine[i] > 0.9:
+                elif combine[i] <= insignificant or combine[i] > low:
                     likelihood[i] = 0.45
                     likelihoodM[1][2].append(i)  # yellow
 
-                elif combine[i] <= 0.9 or combine[i] > 0.8:
+                elif combine[i] <= low or combine[i] > moderate:
                     likelihood[i] = 0.45
                     likelihoodM[2][2].append(i)  # yellow
 
-                elif combine[i] <= 0.8 or combine[i] > 0.7:
+                elif combine[i] <= moderate or combine[i] > high :
                     likelihood[i] = 0.75
                     likelihoodM[3][2].append(i)  # orange
 
-                elif combine[i] <= 0.7:
+                elif combine[i] <= high:
                     likelihood[i] = 0.75
                     likelihoodM[4][2].append(i)  # orange
 
             elif n == 'fourth hour':
-                if combine[i] > 0.96:
+                if combine[i] > insignificant:
                     likelihood[i] = 0.05
                     likelihoodM[0][3].append(i)  # blue
 
-                elif combine[i] <= 0.96 or combine[i] > 0.9:
+                elif combine[i] <= insignificant or combine[i] > low:
                     likelihood[i] = 0.45
                     likelihoodM[1][3].append(i)  # yellow
 
-                elif combine[i] <= 0.9 or combine[i] > 0.8:
+                elif combine[i] <= low or combine[i] > moderate:
                     likelihood[i] = 0.75
                     likelihoodM[2][3].append(i)  # orange
 
-                elif combine[i] <= 0.8 or combine[i] > 0.7:
+                elif combine[i] <= moderate or combine[i] > high:
                     likelihood[i] = 0.75
                     likelihoodM[3][3].append(i)  # orange
 
-                elif combine[i] <= 0.7:
+                elif combine[i] <= high:
                     likelihood[i] = 0.9
                     likelihoodM[4][3].append(i)  # red
 
             elif n == 'fifth hour':
-                if combine[i] > 0.96:
+                if combine[i] > insignificant:
                     likelihood[i] = 0.05
                     likelihoodM[0][4].append(i)  # blue
 
-                elif combine[i] <= 0.96 or combine[i] > 0.9:
+                elif combine[i] <= insignificant or combine[i] > low:
                     likelihood[i] = 0.45
                     likelihoodM[1][4].append(i)  # yellow
 
-                elif combine[i] <= 0.9 or combine[i] > 0.8:
+                elif combine[i] <= low or combine[i] > moderate:
                     likelihood[i] = 0.75
                     likelihoodM[2][4].append(i)  # orange
 
-                elif combine[i] <= 0.8 or combine[i] > 0.7:
+                elif combine[i] <= moderate or combine[i] > high:
                     likelihood[i] = 0.9
                     likelihoodM[3][4].append(i)  # red
 
-                elif combine[i] <= 0.7:
+                elif combine[i] <= high:
                     likelihood[i] = 0.9
                     likelihoodM[4][4].append(i)  # red
 
         # print (likelihoodM)
         # Plot the Liklihood Matrix
         plt.clf()
-        plt.subplot(211)
+        plt.subplot(221)
         ax = plt.gca()
         ax.add_patch(patches.Rectangle((0, 0.9), len(combine), 0.1, facecolor="red"))
         ax.add_patch(patches.Rectangle((0, 0.6), len(combine), 0.3, facecolor="orange"))
@@ -325,20 +423,55 @@ class Index(object):
         plt.xlabel('TIme Series')
         plt.ylabel('Liklihood Scale')
         plt.title('Liklihood Indicator')
+
         ax.figure.canvas.draw()
-        analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
-        analysisb = Button(analysisax, 'Severity Indicator')
+
+        likx = plt.axes([0.05, 0.10, 0.275, 0.075])
+        likb = Button(likx, 'Likelihood Indicator')
         ax.figure.canvas.draw()
-        analysisb.on_clicked(self.severity_call)
+
+        likb.on_clicked(self.likelihood_call)
+
+        sevx = plt.axes([0.375, 0.10, 0.275, 0.075])
+        sevb = Button(sevx, 'Severity Indicator')
+        ax.figure.canvas.draw()
+        sevb.on_clicked(self.severity_call)
+
+        riskx = plt.axes([0.7, 0.10, 0.275, 0.075])
+        riskb = Button(riskx, 'Risk Indicator')
+        ax.figure.canvas.draw()
+        riskb.on_clicked(self.risk_call)
+
+        plt.subplot(222)
+        ax1 = plt.gca()
+
+        plt.title('Liklihood Indicator Scale')
+        img1 = mpimg.imread('Likelihood Indicator.png')
+        plt.imshow(img1)
+        ax1.figure.canvas.draw()
+        labely = ['0-0',' Detla F','0-4%', '4-10%', '10-20%', '20-30%', '>30%']
+        labelx = [1, 2, 3, 4, 5 ]
+        ax1.set_xticklabels(labelx)
+        ax1.set_yticklabels(labely)
+
+
+        update_ind = plt.axes([0.6, 0.5, 0.275, 0.075])
+        update_ind_b = Button(update_ind, 'Update Indicator Scale')
+        ax.figure.canvas.draw()
+        update_ind_b.on_clicked(self.update_indc)
+
+        plt.show()
+
+    def update_indc(self, event):
+        plt.clf()
+        ax = plt.gca()
+
+        anchored_text = AnchoredText("Test", loc=2)
+        ax.add_artist(anchored_text)
+
         plt.show()
 
     def severity_call(self, event):
-
-        # print (slope[:])
-        # print (len(slope))
-        # print (len(x))
-        # print (len(combine))
-        # severity = np.zeros(len(slope))
 
         insignificant = 0.96
         low = 0.9
@@ -464,7 +597,7 @@ class Index(object):
 
         # Plot the Severity  Matrix
         plt.clf()
-        plt.subplot(211)
+        plt.subplot(221)
         ax = plt.gca()
         ax.add_patch(patches.Rectangle((0, low), len(slope), 0.1, facecolor="red"))
         ax.add_patch(patches.Rectangle((0, 0.6), len(slope), 0.3, facecolor="orange"))
@@ -476,10 +609,49 @@ class Index(object):
         plt.ylabel('Severity Scale')
         plt.title('Severity Indicator')
         ax.figure.canvas.draw()
-        analysisax = plt.axes([0.3, 0.3, 0.5, 0.075])
-        analysisb = Button(analysisax, 'Risk Indicator')
+
+        likx = plt.axes([0.05, 0.10, 0.275, 0.075])
+        likb = Button(likx, 'Likelihood Indicator')
         ax.figure.canvas.draw()
-        analysisb.on_clicked(self.risk_call)
+
+        likb.on_clicked(self.likelihood_call)
+
+        sevx = plt.axes([0.375, 0.10, 0.275, 0.075])
+        sevb = Button(sevx, 'Severity Indicator')
+        ax.figure.canvas.draw()
+        sevb.on_clicked(self.severity_call)
+
+        riskx = plt.axes([0.7, 0.10, 0.275, 0.075])
+        riskb = Button(riskx, 'Risk Indicator')
+        ax.figure.canvas.draw()
+        riskb.on_clicked(self.risk_call)
+
+
+        plt.subplot(222)
+        ax1 = plt.gca()
+
+        plt.title('Severity Indicator Scale')
+        #plt.tick_params(axis='y', which='both', bottom='off', top='off', labelbottom='off')
+        img1 = mpimg.imread('Likelihood Indicator.png')
+        plt.imshow(img1)
+        ax1.figure.canvas.draw()
+        labely = ['0-0',' Detla F','0-4%', '4-10%', '10-20%', '20-30%', '>30%']
+
+        labelx = ['0-1','1-2','2-3','3-4','4-5']
+
+        ind = [1,3,6,9,13]  # the x locations for the groups
+        #plt.xticks(ind,labelx)
+
+        ax1.set_xticklabels(labelx)
+        ax1.set_yticklabels(labely)
+
+
+        update_ind = plt.axes([0.6, 0.5, 0.275, 0.075])
+        update_ind_b = Button(update_ind, 'Update Indicator Scale')
+        ax.figure.canvas.draw()
+        update_ind_b.on_clicked(self.update_indc)
+
+        ax.figure.canvas.draw()
         plt.show()
 
     def risk_call(self, event):
@@ -609,7 +781,7 @@ class Index(object):
 
         # Plot the Risk  Matrix
         plt.clf()
-        plt.subplot(211)
+        plt.subplot(221)
         ax = plt.gca()
         ax.add_patch(patches.Rectangle((0, 0.9), len(slope), 0.1, facecolor="red"))
         ax.add_patch(patches.Rectangle((0, 0.6), len(slope), 0.3, facecolor="orange"))
@@ -620,6 +792,49 @@ class Index(object):
         plt.xlabel('TIme Series')
         plt.ylabel('Risk Scale')
         plt.title('Risk Indicator')
+        ax.figure.canvas.draw()
+
+
+        likx = plt.axes([0.05, 0.10, 0.275, 0.075])
+        likb = Button(likx, 'Likelihood Indicator')
+        ax.figure.canvas.draw()
+
+        likb.on_clicked(self.likelihood_call)
+
+        sevx = plt.axes([0.375, 0.10, 0.275, 0.075])
+        sevb = Button(sevx, 'Severity Indicator')
+        ax.figure.canvas.draw()
+        sevb.on_clicked(self.severity_call)
+
+        riskx = plt.axes([0.7, 0.10, 0.275, 0.075])
+        riskb = Button(riskx, 'Risk Indicator')
+        ax.figure.canvas.draw()
+        riskb.on_clicked(self.risk_call)
+
+
+        plt.subplot(222)
+        ax1 = plt.gca()
+
+        plt.title('Risk Indicator Scale')
+        #plt.tick_params(axis='y', which='both', bottom='off', top='off', labelbottom='off')
+        img1 = mpimg.imread('Likelihood Indicator.png')
+        plt.imshow(img1)
+        ax1.figure.canvas.draw()
+        labely = ['0-0',' Detla F','0-10%', '10-30%', '30-60%', '60-90%', '>90%']
+
+        labelx = [1,2,3,4,5]
+
+        ind = [1,3,6,9,13]  # the x locations for the groups
+        #plt.xticks(ind,labelx)
+
+        ax1.set_xticklabels(labelx)
+        ax1.set_yticklabels(labely)
+
+
+        update_ind = plt.axes([0.6, 0.5, 0.275, 0.075])
+        update_ind_b = Button(update_ind, 'Update Indicator Scale')
+        ax.figure.canvas.draw()
+        update_ind_b.on_clicked(self.update_indc)
         ax.figure.canvas.draw()
         plt.show()
 
@@ -651,7 +866,7 @@ netLeakAx = plt.axes([0.3, 0.450, 0.5, 0.075])
 energyconAx = plt.axes([0.3, 0.2, 0.5, 0.075])
 
 biocon = Button(bioconAx, 'BioCon')
-biocon.on_clicked(callback.rawData)
+biocon.on_clicked(callback.stie_map)
 
 netleak = Button(netLeakAx, 'NetLeak')
 netleak.on_clicked(callback.stie_map)
