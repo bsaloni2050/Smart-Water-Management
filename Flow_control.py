@@ -164,7 +164,16 @@ class Index(object):
 
         plt.clf()
         ax = plt.gca()
-        plt.subplot(211)
+
+        plt.subplot(221)
+
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+        ax.text(3, 8, 'boxed italics text in data coords', style='italic',
+                bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 10})
+
+        
+        plt.subplot(222)
 
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
@@ -278,6 +287,13 @@ class Index(object):
 
         ax.figure.canvas.draw()
         plt.show()
+
+    def change_indicators(self, event, insignificant, low, moderate, high):
+        print ("nothing")
+
+
+
+
 
 
 
