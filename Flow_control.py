@@ -199,6 +199,7 @@ class Index(object):
         epanetb.on_clicked(self.launch_Epanet)
         # self.show_buttons(event)
         plt.show()
+        
 
     def launch_Epanet(self, event):
         self.ind += 1
