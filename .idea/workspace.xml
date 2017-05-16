@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4fec820-b7e3-4ed1-ad06-114eed53028a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Layout.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Likelihood Indicator.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Liklihood Scale.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sitemap.png" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Database_Creation.py" afterPath="$PROJECT_DIR$/Trash/Database_Creation.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/trash.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sitemap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EpanetConnection.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Flow_control.py" afterPath="$PROJECT_DIR$/Flow_control.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Login_page.py" afterPath="$PROJECT_DIR$/Login_page.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Layout.py" afterPath="$PROJECT_DIR$/Layout.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trash.py" afterPath="$PROJECT_DIR$/trash.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,12 +20,34 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Layout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Layout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+            <state relative-caret-position="206">
+              <caret line="152" column="32" lean-forward="true" selection-start-line="152" selection-start-column="32" selection-end-line="152" selection-end-column="32" />
+              <folding>
+                <element signature="e#40#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EpanetConnection.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/EpanetConnection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Flow_control.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Flow_control.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2310">
+              <caret line="165" column="22" lean-forward="false" selection-start-line="165" selection-start-column="22" selection-end-line="165" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -38,29 +56,22 @@
       <file leaf-file-name="trash.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trash.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+            <state relative-caret-position="1725">
+              <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#2619#2633#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Time_series_updation.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Time_series_updation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Time_series_updation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Likelihood Indicator.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Images/Likelihood Indicator.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -86,11 +97,14 @@
       <find>clf</find>
       <find>figure</find>
       <find />
+      <find>cluster_number</find>
+      <find>Tkinter</find>
     </findStrings>
     <replaceStrings>
       <replace>low</replace>
       <replace>high</replace>
       <replace>0.75</replace>
+      <replace>tkinter</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -103,7 +117,6 @@
         <option value="$PROJECT_DIR$/ImportExcel.py" />
         <option value="$PROJECT_DIR$/ImportPlotPandas.py" />
         <option value="$PROJECT_DIR$/Verify_Graphs.py" />
-        <option value="$PROJECT_DIR$/trash.py" />
         <option value="$PROJECT_DIR$/buttontest.py" />
         <option value="$PROJECT_DIR$/hello.py" />
         <option value="$PROJECT_DIR$/menu.py" />
@@ -132,15 +145,19 @@
         <option value="$PROJECT_DIR$/Login_page.py" />
         <option value="$PROJECT_DIR$/MC.py" />
         <option value="$PROJECT_DIR$/NYC_Taxi.py" />
+        <option value="$PROJECT_DIR$/../Machine Learning Samples/NYC_Taxi.py" />
+        <option value="$PROJECT_DIR$/../Machine Learning Samples/test.py" />
         <option value="$PROJECT_DIR$/Layout.py" />
+        <option value="$PROJECT_DIR$/trash.py" />
+        <option value="$PROJECT_DIR$/EpanetConnection.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="558" />
-    <option name="y" value="23" />
-    <option name="width" value="804" />
-    <option name="height" value="808" />
+    <option name="x" value="528" />
+    <option name="y" value="32" />
+    <option name="width" value="954" />
+    <option name="height" value="680" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -176,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -206,6 +222,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -213,50 +230,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Images" />
       <recent name="$PROJECT_DIR$/Trash" />
       <recent name="$PROJECT_DIR$/SmartWaterGUI" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.NYC_Taxi">
-    <configuration default="false" name="Flow_control" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SmartWater" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flow_control.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Login_page" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SmartWater" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Login_page.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.Layout">
     <configuration default="false" name="Layout" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -274,23 +257,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="MC" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SmartWater" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MC.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="NYC_Taxi" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -304,6 +270,57 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="SmartWater" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NYC_Taxi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NYC_Taxi (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Machine Learning Samples" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SmartWater" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Machine Learning Samples/NYC_Taxi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="trash" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SmartWater" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trash.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Flow_control" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SmartWater" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flow_control.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -443,19 +460,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Flow_control" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Login_page" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Layout" />
-      <item index="3" class="java.lang.String" itemvalue="Python.MC" />
-      <item index="4" class="java.lang.String" itemvalue="Python.NYC_Taxi" />
+      <item index="0" class="java.lang.String" itemvalue="Python.Layout" />
+      <item index="1" class="java.lang.String" itemvalue="Python.NYC_Taxi" />
+      <item index="2" class="java.lang.String" itemvalue="Python.NYC_Taxi (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.trash" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Flow_control" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.NYC_Taxi" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Layout" />
-        <item index="2" class="java.lang.String" itemvalue="Python.MC" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Flow_control" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Login_page" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Layout" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Flow_control" />
+        <item index="2" class="java.lang.String" itemvalue="Python.trash" />
+        <item index="3" class="java.lang.String" itemvalue="Python.NYC_Taxi (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python.NYC_Taxi" />
       </list>
     </recent_temporary>
   </component>
@@ -473,26 +490,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="558" y="23" width="804" height="808" extended-state="0" />
+    <frame x="528" y="32" width="954" height="680" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29885057" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19721329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34887007" sideWeight="0.27416798" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32681563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27040815" sideWeight="0.7256146" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41480446" sideWeight="0.49639547" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41326532" sideWeight="0.49639547" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.551676" sideWeight="0.7256146" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.49652433" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -524,28 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GUI_Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Trash/hello.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trash.py" />
-    <entry file="file://$PROJECT_DIR$/Trash/tse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Trash/Verify_Graphs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -583,13 +578,7 @@
     <entry file="file://$PROJECT_DIR$/DragCircle" />
     <entry file="file://$PROJECT_DIR$/ImportPlotPandas.py" />
     <entry file="file://$PROJECT_DIR$/ImportExcel.py" />
-    <entry file="file://$PROJECT_DIR$/../../BIgD/mapper1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../BIgD/mapper1.py" />
     <entry file="file:///usr/local/lib/python3.6/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -728,29 +717,8 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NYC_Taxi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Login_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NYC_Taxi.py" />
+    <entry file="file://$PROJECT_DIR$/MC.py" />
     <entry file="file://$PROJECT_DIR$/Images/figure4.gif">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -766,38 +734,53 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flow_control.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8627">
-          <caret line="240" column="18" lean-forward="true" selection-start-line="240" selection-start-column="18" selection-end-line="240" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GUI_Main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Machine Learning Samples/MC.py" />
+    <entry file="file://$PROJECT_DIR$/../Machine Learning Samples/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Machine Learning Samples/NYC_Taxi.py" />
+    <entry file="file://$PROJECT_DIR$/Login_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Layout.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        <state relative-caret-position="206">
+          <caret line="152" column="32" lean-forward="true" selection-start-line="152" selection-start-column="32" selection-end-line="152" selection-end-column="32" />
+          <folding>
+            <element signature="e#40#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flow_control.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="165" column="22" lean-forward="false" selection-start-line="165" selection-start-column="22" selection-end-line="165" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trash.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        <state relative-caret-position="1725">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#2619#2633#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -805,7 +788,15 @@
     <entry file="file://$PROJECT_DIR$/Time_series_updation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EpanetConnection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
         </state>
       </provider>

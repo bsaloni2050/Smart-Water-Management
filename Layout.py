@@ -1,17 +1,23 @@
-'''This is the Layout using Tkinder'''
+'''This is the Layout using Tkinter'''
 
 from Tkinter import Tk, Text, BOTH, W, N, E, S
 from ttk import Frame, Button, Label, Style
-from Tkinter import *
+from tkinter import *
 import tkMessageBox
 import Tkinter
 import os
 from PIL import ImageTk, Image
 import matplotlib as plt
-matplotlib.use("TkAgg")
+#from matplotlib.use("TkAgg")
 import webbrowser
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
+from tkFileDialog import askopenfilenames
+from tkinter import Tk
+from tkFileDialog import askopenfilenames
+from tkinter import filedialog
+
+
 
 
 
@@ -37,6 +43,8 @@ class Example(Frame):
         label3.grid(row=4, column=0, sticky=W)
         label4 = Label(self, text="Designation: Consultant")
         label4.grid(row=5, column=0, sticky=W)
+        label8 = Label(self, text="Site Name : Lille")
+        label8.grid(row=6, column=0, sticky=W)
         # label6 = Label(self, text="Application Name: ")
         # label6.grid(row=6, column=0, sticky=W)
 
@@ -51,8 +59,8 @@ class Example(Frame):
         mb1.menu.add_checkbutton(label="EnCon", variable=ketchVar)
 
 
-        mb = Menubutton(self, text="Site Name", relief=RAISED)
-        mb.grid(row=7, column=0, sticky=W)
+        mb = Menubutton(self, text="Site Map", relief=RAISED)
+        mb.grid(row=8, column=0, sticky=W)
         mb.menu = Menu(mb, tearoff=0)
         mb["menu"] = mb.menu
         mayoVar = IntVar()
@@ -63,7 +71,7 @@ class Example(Frame):
         # submit = Button(self, text="Launch EPANET", command= self.launch)
         # submit.grid(row=17, column =0, sticky=W)
 
-        bard = Image.open("sitemap.png")
+        bard = Image.open("/Users/salonibindra/Documents/work/Smart-Water-Management/Images/sitemap.png")
         bard1 = bard.resize((550,650),Image.ANTIALIAS)
         bardejov = ImageTk.PhotoImage(bard1)
         label1 = Label(self, image=bardejov, borderwidth=2, relief="solid")
@@ -73,13 +81,47 @@ class Example(Frame):
     def launch_GIS(self):
         #os.system("open /Applications/Safari.app")
         webbrowser.open("https://www.arcgis.com/home/index.html")
+        self.initUI()
+        path = self.fileupload()
+        bard = Image.open(path)
+        bard1 = bard.resize((550, 650), Image.ANTIALIAS)
+        bardejov = ImageTk.PhotoImage(bard1)
+        label1 = Label(self, image=bardejov, borderwidth=2, relief="solid")
+        label1.image = bardejov
+        label1.grid(row=3, column=2, columnspan=6, rowspan=40, sticky=E + W + S + N, padx=50, pady=15)
+
+    def fileupload(self):
+        tk = Tk()
+        tk.filename = filedialog.askopenfilename(title="choose your file")
+        #,filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
+        print (tk.filename)
+        tk.withdraw()
+        return tk.filename.strip("(,',)")
 
 
     def launch_GoogleEarth(self):
         webbrowser.open("https://earth.google.com/web/")
 
+        self.initUI()
+        path = self.fileupload()
+        bard = Image.open(path)
+        bard1 = bard.resize((550, 650), Image.ANTIALIAS)
+        bardejov = ImageTk.PhotoImage(bard1)
+        label1 = Label(self, image=bardejov, borderwidth=2, relief="solid")
+        label1.image = bardejov
+        label1.grid(row=3, column=2, columnspan=6, rowspan=40, sticky=E + W + S + N, padx=50, pady=15)
+
     def launch_Epanet(self):
         webbrowser.open("http://epanet.de/")
+
+        submit = Button(self, text="Upload CAD", command=self.upload_CAD_Graph)
+        submit.grid(row=19, column=0, sticky=W)
+
+        submit = Button(self, text="Upload Graph", command=self.upload_CAD_Graph)
+        submit.grid(row=20, column=0, sticky=W)
+
+        submit = Button(self, text="Upload Data", command=self.upload_CAD_Graph)
+        submit.grid(row=21, column=0, sticky=W)
 
 
     def epanet(self):
@@ -91,16 +133,31 @@ class Example(Frame):
         label2.grid(row=12, column=0, sticky=W)
 
         submit = Button(self, text="Launch EPANET", command= self.launch_Epanet)
-        submit.grid(row=14, column =0, sticky=W)
+        submit.grid(row=18, column =0, sticky=W)
+
 
         mb = Menubutton(self, text="Data Analysis", relief=RAISED)
-        mb.grid(row=16, column=0, sticky=W)
+        mb.grid(row=14, column=0, sticky=W)
         mb.menu = Menu(mb, tearoff=0)
         mb["menu"] = mb.menu
         mayoVar = IntVar()
         ketchVar = IntVar()
-        mb.menu.add_checkbutton(label="Spot Analysis", variable=mayoVar, command=self.launch_Epanet)
+        mb.menu.add_checkbutton(label="Spot Analysis", variable=mayoVar, command=self.donothing)
         mb.menu.add_checkbutton(label=" DMA", variable=ketchVar)
+
+    def donothing(self):
+        print ("work in progress")
+
+    def upload_CAD_Graph(self):
+
+        path = self.fileupload()
+        bard = Image.open(path)
+        bard1 = bard.resize((550, 650), Image.ANTIALIAS)
+        bardejov = ImageTk.PhotoImage(bard1)
+        label1 = Label(self, image=bardejov, borderwidth=2, relief="solid")
+        label1.image = bardejov
+        label1.grid(row=3, column=2, columnspan=6, rowspan=40, sticky=E + W + S + N, padx=50, pady=15)
+
 
     def rawData(self, event):
         self.ind += 1
