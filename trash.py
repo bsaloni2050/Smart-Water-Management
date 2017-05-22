@@ -1,126 +1,53 @@
-# # from Tkinter import *
-# # from Tkinter import Tk, Label, BOTH
-# # from PIL import Image, ImageTk
-# #
-# #
-# # from ttk import Frame, Style
-# #
-# # root = Tk()
-# #
-# # m1 = PanedWindow(root)
-# # m1.pack(fill=BOTH, expand=1)
-# #
-# # opp_name = Label(m1, text="Operator Name :")
-# # opp_value = Label(m1, text=" Saloni")
-# #
-# # app_name = Label(m1, text="Application Name :")
-# # app_value = Label(m1, text=" BIocon")
-# #
-# # site_name = Label(m1, text="Site Name :")
-# # site_value = Label(m1, text=" Sector 1")
-# #
-# # opp_name.pack()
-# # opp_value.pack()
-# # app_name.pack()
-# # app_value.pack()
-# # site_name.pack()
-# # site_value.pack()
-# #
-# # Style().configure("TFrame", background="#333")
-# #
-# # bard = Image.open("/Users/salonibindra/Desktop/download.jpeg")
-# # bardejov = ImageTk.PhotoImage(bard)
-# # bardejov.pack()
-# #
-# # #label1 = Label( image=bardejov)
-# # # label1.image = bardejov
-# # # label1.place(x=20, y=20)
-# # #
-# # # m1.add(opp_name)
-# # # m1.add(opp_value)
-# # # m1.add(app_name)
-# # # m1.add(app_value)
-# # # m1.add(site_name)
-# # # m1.add(site_value)
-# # #
-# # # m2 = PanedWindow(m1, orient=VERTICAL)
-# # # m1.add(m2)
-# # #
-# # # top = Label(m2, text="top pane")
-# # # m2.add(top)
-# # #
-# # # bottom = Label(m2, text="bottom pane")
-# # # m2.add(bottom)
-# #
-# # root.geometry("500x150")
-# # #m1.winfo_geometry(500)
-# # mainloop()
-#
-#
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from matplotlib import mlab
-# import Pyclustering as pc
-# from sklearn.cluster import KMeans
-#
-#
-# # make fake user data
-# users = np.random.normal(0, 10, (20, 5))
-#
-# # cluster
-# clusterid, error, nfound = pc.kcluster(users, nclusters=3, transpose=0,
-#                                        npass=10, method='a', dist='e')
-# centroids, _ = pc.clustercentroids(users, clusterid=clusterid)
-#
-# # reduce dimensionality
-# users_pca = mlab.PCA(users)
-# cutoff = users_pca.fracs[1]
-# users_2d = users_pca.project(users, minfrac=cutoff)
-# centroids_2d = users_pca.project(centroids, minfrac=cutoff)
-#
-# # make a plot
-# colors = ['red', 'green', 'blue']
-# plt.figure()
-# plt.xlim([users_2d[:,0].min() - .5, users_2d[:,0].max() + .5])
-# plt.ylim([users_2d[:,1].min() - .5, users_2d[:,1].max() + .5])
-# plt.xticks([], []); plt.yticks([], []) # numbers aren't meaningful
-#
-# show the centroids
-# plt.scatter(centroids_2d[:,0], centroids_2d[:,1], marker='o', c=colors, s=100)
-#
-# # show user numbers, colored by their cluster id
-# for i, ((x,y), kls) in enumerate(zip(users_2d, clusterid)):
-#     plt.annotate(str(i), xy=(x,y), xytext=(0,0), textcoords='offset points',
-#                  color=colors[kls])
-#
-import Tkinter
-from Tkinter import Tk
-tk=Tk()
-from tkFileDialog import askopenfilenames
-import tkMessageBox
-tk.withdraw()
-from tkinter.filedialog import askopenfilename
+from Tkinter import *
+import csv, sqlite3
+from tabulate import tabulate
+
+import pandas
+root = Tk()
+root.geometry("900x700+200+250")
+
+con = sqlite3.connect("epanet.db")
+cur = con.cursor()
+tup = []
+
+path = '/Users/salonibindra/Desktop/output1.csv'
+df = pandas.read_csv(path)
+df.to_sql('epanet', con, if_exists='append', index=False)
+# x = cur.execute("Select * from epanet where Node_ID = 'Node J-2'")
+cur.execute("Select DISTINCT Node_ID from epanet group by Node_ID")
+node_name = list(cur.fetchall())
 
 
-def fileupload():
-    while True:
-        uploadedfilenames = askopenfilenames(multiple=True)
-        if uploadedfilenames == '':
-            tkMessageBox.showinfo(message="File Upload has been cancelled program will stop")
-            return
-        uploadedfiles = tk.splitlist(uploadedfilenames)
-        return uploadedfiles
+mb1 = Menubutton(text="Node ID's", relief=RAISED)
+mb1.grid(row=5, column=0)
+mb1.menu = Menu(mb1, tearoff=0)
+mb1["menu"] = mb1.menu
+mayoVar = IntVar()
+for x in node_name:
+    mb1.menu.add_checkbutton(label=x, variable=mayoVar )#command=self.uploadEpanetData('node'))
 
-print (fileupload())
-
-#fileupload()
-
-
-name = askopenfilename( title = "Choose a file.")
-print (name)
-#name = "('/Users/salonibindra/Desktop/images.gif',)"
-name = name.strip("(,',)")
-print (name)
+mb = Menubutton(text="Node ID's", relief=RAISED)
+mb.grid(row=2, column=0)
+mb.menu = Menu(mb, tearoff=0)
+mb["menu"] = mb.menu
+mayoVar = IntVar()
+mb.menu.add_checkbutton(label="hey", variable=mayoVar )#command=self.uploadEpanetData('node'))
 
 
-print("how to make tkinter speak to ")
+#data = list(cur.fetchall())
+con.commit()
+con.close()
+
+# columns =['Time',	'Elevation',	'Base Demand',	'Initial_Quality',	'Demand',	'Head',	'Pressure',	'Quality',	'Node_id']
+#
+# for r in range(25):
+#     for i in range(9):
+#         l = Label(text=data[r][i], relief=RIDGE)
+#         l.grid(row=r+1, column=i, sticky=NSEW)
+#
+# for d in range(len(columns)):
+#     l = Label(text=columns[d], relief=RIDGE)
+#     l.grid(row=0, column=d, sticky=NSEW)
+#
+#
+root.mainloop()
